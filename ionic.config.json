@@ -1,0 +1,7 @@
+{
+  "name": "Busina",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
