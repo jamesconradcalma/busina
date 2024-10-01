@@ -9,12 +9,60 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Busina</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <ion-button id="startTripBtn" expand="block" (click)="startScan()">Start your Trip</ion-button>
+  <ion-button id="mapsBtn" expand="block" (click)="goToMaps()">Maps</ion-button>
+  <!-- <ion-button id="startTripBtn" expand="block" (click)="startScanCommunity()">Start your Trip 2 (CapacitorCommunityBarcode)</ion-button> -->
+  <ion-button id="getLocationBtn" expand="block" (click)="getCurrentLocation()">Get Start Location</ion-button>
+  <ion-button id="getEndLocationBtn" expand="block" (click)="getEndLocation()">Get End Location</ion-button>
+
+  <!-- for road/path  -->
+  <ion-button id="startTripBtn" expand="block" (click)="startTrip()">Start Trip</ion-button>
+  <ion-button id="endTripBtn" expand="block" (click)="endTrip()">End Trip</ion-button>
+
+  <div *ngIf="latitude !== null && longitude !== null">
+    <p>Start Latitude: {{ latitude }}</p>
+    <p>Start Longitude: {{ longitude }}</p>
   </div>
+
+  <div *ngIf="endlatitude !== null && endlongitude !== null">
+    <p>End Latitude: {{ endlatitude }}</p>
+    <p>End Longitude: {{ endlongitude }}</p>
+  </div>
+
+  <div *ngIf="distance !== null">
+    <p>Distance: {{ distance }}</p>
+  </div>
+
+  <div *ngIf="qrcodeResult !== null">
+    <p>QR Code Result: {{ qrcodeResult }}</p>
+  </div>
+
+  <div>
+    <h2>Tracked Locations</h2>
+    <ul>
+      <!-- Loop through each location in the array and display the latitude and longitude -->
+      <li *ngFor="let location of locations; let i = index">
+        {{ i + 1 }}. Latitude: {{ location.latitude }}, Longitude: {{ location.longitude }}
+      </li>
+    </ul>
+  
+  </div>
+  
+
+<!-- 
+    <ion-list>
+    <ion-item *ngFor="let barcode of barcodes">
+      <ion-label position="stacked">{{ barcode.format }}</ion-label>
+      <ion-input type="text" [value]="barcode.rawValue"></ion-input>
+    </ion-item>
+  </ion-list> -->
+  <!-- <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="scanBarcode()" [disabled]="!isSupported">
+      <ion-icon name="scan"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
 </ion-content>
